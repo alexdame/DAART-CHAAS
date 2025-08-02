@@ -10,45 +10,122 @@
     <script src="https://cdn.jsdelivr.net/npm/lucide-preact@latest"></script>
     <style>
         @import url('https://rsms.me/inter/inter.css');
-        html { font-family: 'Inter', sans-serif; }
+        html { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         body { margin: 0; padding: 0; box-sizing: border-box; }
         * { box-sizing: border-box; }
-        .prose ul li {
-          margin-bottom: 0.5rem;
-        }
+
         /* Custom styles to hide sections by default */
         .page-content {
             display: none;
+            padding-top: 5rem; /* Space for the fixed navigation bar */
         }
         /* Style for active page */
         #home-page {
             display: block;
         }
+        /* Hero Section with background and a colorful gradient overlay */
+        .hero-section {
+            /* Updated to a navy blue gradient to match the logo */
+            background-image: linear-gradient(to right, rgba(20, 30, 70, 0.8), rgba(40, 50, 110, 0.8)), url('https://images.unsplash.com/photo-1542838139-26960d7c762c?q=80&w=2942&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        /* Base styling for all company buttons */
+        .company-button {
+            transition: all 0.3s ease-in-out;
+        }
+        .company-button:hover {
+            transform: translateY(-5px) scale(1.05); /* Lift and scale on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Add a more pronounced shadow */
+        }
+        /* Styling for the circular icons inside the buttons */
+        .company-button .icon-container {
+            transition: all 0.3s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .company-button:hover .icon-container {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        /* General content styling for readability */
+        .prose ul li {
+          margin-bottom: 0.5rem;
+        }
+        /* Unique Hero Sections for each page with real images */
+        #media-page .hero {
+            background-image: linear-gradient(to right, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8)), url('https://images.unsplash.com/photo-1629429413280-990a442d99d3?q=80&w=2940&auto=format&fit=crop');
+        }
+        #food-page .hero {
+            background-image: linear-gradient(to right, rgba(249, 115, 22, 0.8), rgba(239, 68, 68, 0.8)), url('https://images.unsplash.com/photo-1582236683515-37357492c64b?q=80&w=2940&auto=format&fit=crop');
+        }
+        #furniture-page .hero {
+            background-image: linear-gradient(to right, rgba(34, 197, 94, 0.8), rgba(234, 179, 8, 0.8)), url('https://images.unsplash.com/photo-1556912167-96a935afb76a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        }
+        #clothes-page .hero {
+            background-image: linear-gradient(to right, rgba(236, 72, 153, 0.8), rgba(168, 85, 247, 0.8)), url('https://images.unsplash.com/photo-1549429158-b64d4a849202?q=80&w=2940&auto=format&fit=crop');
+        }
+        #solar-page .hero {
+            background-image: linear-gradient(to right, rgba(251, 191, 36, 0.8), rgba(34, 197, 94, 0.8)), url('https://images.unsplash.com/photo-1509172814896-1a3b10b0a519?q=80&w=2940&auto=format&fit=crop');
+        }
+        .hero-section-page {
+            background-size: cover;
+            background-position: center;
+            padding: 8rem 2rem 4rem; /* Top padding to account for nav bar */
+            color: white;
+            text-align: center;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .animate-fade-in-down {
+            animation: fadeInDown 1s ease-out;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased min-h-screen flex flex-col">
+<body class="bg-gray-100 text-gray-900 antialiased min-h-screen flex flex-col">
 
     <!-- Navigation Bar -->
     <nav class="p-4 bg-white shadow-lg fixed w-full z-20 transition-all duration-300 rounded-b-xl">
         <div class="container mx-auto flex justify-between items-center px-4 md:px-6 lg:px-8">
             <!-- Logo and brand name -->
             <div class="flex items-center space-x-2">
-                <i data-lucide="building-2" class="text-indigo-600 w-10 h-10"></i>
+                <!-- IMPORTANT: The 'src' attribute now uses a relative path. -->
+                <!-- Please make sure your image file is named "WhatsApp Image 2025-08-01 at 00.26.47.jpeg" and is in the same folder as this index.html file. -->
+                <!-- The 'onerror' attribute provides a fallback if the image fails to load. -->
+                <img src="./WhatsApp Image 2025-08-01 at 00.26.47.jpeg" alt="DAART-CHAS Group Logo" class="w-10 h-10 shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/40x40/4a74b3/ffffff?text=DC';">
                 <a href="#home" class="text-2xl font-bold text-gray-800" onclick="navigateTo('home')">DAART-CHAS</a>
             </div>
 
             <!-- Desktop navigation links -->
             <div class="hidden md:flex space-x-6 lg:space-x-8">
-                <a href="#home" class="text-gray-600 hover:text-indigo-600 transition duration-300 font-medium" onclick="navigateTo('home')">Home</a>
-                <a href="#media" class="text-gray-600 hover:text-indigo-600 transition duration-300 font-medium" onclick="navigateTo('media')">Media</a>
-                <a href="#food" class="text-gray-600 hover:text-indigo-600 transition duration-300 font-medium" onclick="navigateTo('food')">Food & Hotels</a>
-                <a href="#furniture" class="text-gray-600 hover:text-indigo-600 transition duration-300 font-medium" onclick="navigateTo('furniture')">Furniture & Interiors</a>
-                <a href="#clothes" class="text-gray-600 hover:text-indigo-600 transition duration-300 font-medium" onclick="navigateTo('clothes')">Clothes</a>
+                <a href="#home" class="text-gray-600 hover:text-red-500 transition duration-300 font-medium" onclick="navigateTo('home')">Home</a>
+                <a href="#media" class="text-gray-600 hover:text-red-500 transition duration-300 font-medium" onclick="navigateTo('media')">Media</a>
+                <a href="#food" class="text-gray-600 hover:text-red-500 transition duration-300 font-medium" onclick="navigateTo('food')">Food & Hotels</a>
+                <a href="#furniture" class="text-gray-600 hover:text-red-500 transition duration-300 font-medium" onclick="navigateTo('furniture')">Furniture & Interiors</a>
+                <a href="#clothes" class="text-gray-600 hover:text-red-500 transition duration-300 font-medium" onclick="navigateTo('clothes')">Clothes</a>
+                <a href="#solar" class="text-gray-600 hover:text-red-500 transition duration-300 font-medium" onclick="navigateTo('solar')">Solar Energy</a>
             </div>
 
             <!-- Mobile menu button -->
             <div class="md:hidden">
-                <button id="mobile-menu-toggle" class="text-gray-600 hover:text-indigo-600 focus:outline-none focus:text-indigo-600 transition duration-300" aria-label="Toggle mobile menu">
+                <button id="mobile-menu-toggle" class="text-gray-600 hover:text-red-500 focus:outline-none focus:text-red-500 transition duration-300" aria-label="Toggle mobile menu">
                     <i data-lucide="menu" class="w-7 h-7" id="menu-icon"></i>
                     <i data-lucide="x" class="w-7 h-7 hidden" id="close-icon"></i>
                 </button>
@@ -62,41 +139,43 @@
             <a href="#food" class="block py-2 px-4 text-gray-800 hover:bg-gray-100 rounded-lg transition duration-300 font-medium" onclick="navigateTo('food'); document.getElementById('mobile-menu').classList.add('hidden');">Food & Hotels</a>
             <a href="#furniture" class="block py-2 px-4 text-gray-800 hover:bg-gray-100 rounded-lg transition duration-300 font-medium" onclick="navigateTo('furniture'); document.getElementById('mobile-menu').classList.add('hidden');">Furniture & Interiors</a>
             <a href="#clothes" class="block py-2 px-4 text-gray-800 hover:bg-gray-100 rounded-lg transition duration-300 font-medium" onclick="navigateTo('clothes'); document.getElementById('mobile-menu').classList.add('hidden');">Clothes</a>
+            <a href="#solar" class="block py-2 px-4 text-gray-800 hover:bg-gray-100 rounded-lg transition duration-300 font-medium" onclick="navigateTo('solar'); document.getElementById('mobile-menu').classList.add('hidden');">Solar Energy</a>
         </div>
     </nav>
     
     <!-- Main content area -->
-    <main class="flex-grow pt-24 md:pt-28">
+    <main class="flex-grow">
         <!-- Home Page Content -->
         <div id="home-page" class="page-content">
-            <header class="py-20 text-center">
+            <!-- Hero Section -->
+            <header class="hero-section">
                 <div class="container mx-auto px-4 md:px-6 lg:px-8">
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4 leading-tight">DAART - CHAS INTEGRATED GROUP</h1>
-                    <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight tracking-wide animate-fade-in-down">DAART-CHAS INTEGRATED GROUP</h1>
+                    <p class="text-lg sm:text-xl text-gray-200 max-w-3xl mx-auto animate-fade-in-up">
                         IS THE HOLDING COMPANY for the diversified companies/subsidiaries under the umbrella of DAART-CHAS GROUP.
                     </p>
                 </div>
             </header>
     
-            <section id="about" class="py-16 px-4 md:px-6 lg:px-8">
+            <section id="about" class="py-20 px-4 md:px-6 lg:px-8 bg-white">
                 <div class="container mx-auto">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">About Us</h2>
-                        <div class="flex flex-col md:flex-row justify-center items-center gap-8">
-                            <div class="p-6 bg-white rounded-xl shadow-lg w-full md:w-1/2">
-                                <div class="flex items-center justify-center mb-4">
-                                    <i data-lucide="target" class="w-10 h-10 text-indigo-600"></i>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                            <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+                                <div class="flex items-center justify-center mb-4 text-red-500">
+                                    <i data-lucide="target" class="w-12 h-12"></i>
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">OUR MISSION</h3>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">OUR MISSION</h3>
                                 <p class="text-gray-600">
                                     To provide very innovative services in all the various areas of businesses we run. To provide cutting edge services, at very cost effective Prices.
                                 </p>
                             </div>
-                            <div class="p-6 bg-white rounded-xl shadow-lg w-full md:w-1/2">
-                                <div class="flex items-center justify-center mb-4">
-                                    <i data-lucide="eye" class="w-10 h-10 text-indigo-600"></i>
+                            <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+                                <div class="flex items-center justify-center mb-4 text-red-500">
+                                    <i data-lucide="eye" class="w-12 h-12"></i>
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">OUR VISION</h3>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">OUR VISION</h3>
                                 <p class="text-gray-600">
                                     To be a leading brand in the core areas of our various businesses.
                                 </p>
@@ -106,40 +185,53 @@
                 </div>
             </section>
     
-            <section id="companies" class="py-16 bg-gray-100 px-4 md:px-6 lg:px-8">
+            <section id="companies" class="py-20 bg-gradient-to-br from-indigo-50 to-red-50 px-4 md:px-6 lg:px-8">
                 <div class="container mx-auto text-center">
                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-12">Our Companies</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <button class="group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50" onclick="navigateTo('media')">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                        <!-- DAART-CHAS MEDIA - Unique Colorful Gradient -->
+                        <button class="group p-8 rounded-xl shadow-lg company-button bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50" onclick="navigateTo('media')">
                             <div class="flex flex-col items-center">
-                                <div class="flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full mb-6 transition-all duration-300 group-hover:bg-indigo-200">
-                                    <i data-lucide="code" class="w-10 h-10 text-indigo-600"></i>
+                                <div class="flex items-center justify-center w-20 h-20 rounded-full mb-6 icon-container">
+                                    <i data-lucide="code" class="w-10 h-10 text-white"></i>
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition duration-300">DAART-CHAS MEDIA</h3>
+                                <h3 class="text-xl font-bold text-white mb-2 transition duration-300">DAART-CHAS MEDIA</h3>
                             </div>
                         </button>
-                        <button class="group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50" onclick="navigateTo('food')">
+                        <!-- DAART-CHAS FOODS - Unique Colorful Gradient -->
+                        <button class="group p-8 rounded-xl shadow-lg company-button bg-gradient-to-r from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50" onclick="navigateTo('food')">
                             <div class="flex flex-col items-center">
-                                <div class="flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full mb-6 transition-all duration-300 group-hover:bg-indigo-200">
-                                    <i data-lucide="utensils" class="w-10 h-10 text-indigo-600"></i>
+                                <div class="flex items-center justify-center w-20 h-20 rounded-full mb-6 icon-container">
+                                    <i data-lucide="utensils" class="w-10 h-10 text-white"></i>
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition duration-300">DAART-CHAS FOODS, HOTELS & HOME MANAGEMENT</h3>
+                                <h3 class="text-xl font-bold text-white mb-2 transition duration-300">DAART-CHAS FOODS, HOTELS & HOME MANAGEMENT</h3>
                             </div>
                         </button>
-                        <button class="group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50" onclick="navigateTo('furniture')">
+                        <!-- DAART-CHAS FURNITURE - Unique Colorful Gradient -->
+                        <button class="group p-8 rounded-xl shadow-lg company-button bg-gradient-to-r from-green-500 to-yellow-600 hover:from-green-600 hover:to-yellow-700 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50" onclick="navigateTo('furniture')">
                             <div class="flex flex-col items-center">
-                                <div class="flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full mb-6 transition-all duration-300 group-hover:bg-indigo-200">
-                                    <i data-lucide="sofa" class="w-10 h-10 text-indigo-600"></i>
+                                <div class="flex items-center justify-center w-20 h-20 rounded-full mb-6 icon-container">
+                                    <i data-lucide="sofa" class="w-10 h-10 text-white"></i>
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition duration-300">DAART-CHAS FURNITURE, INTERIOR AND FINISHINGS</h3>
+                                <h3 class="text-xl font-bold text-white mb-2 transition duration-300">DAART-CHAS FURNITURE, INTERIOR AND FINISHINGS</h3>
                             </div>
                         </button>
-                        <button class="group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50" onclick="navigateTo('clothes')">
+                        <!-- DAART-CHAS CLOTHES - Unique Colorful Gradient -->
+                        <button class="group p-8 rounded-xl shadow-lg company-button bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 focus:outline-none focus:ring-4 focus:ring-pink-500 focus:ring-opacity-50" onclick="navigateTo('clothes')">
                             <div class="flex flex-col items-center">
-                                <div class="flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full mb-6 transition-all duration-300 group-hover:bg-indigo-200">
-                                    <i data-lucide="shirt" class="w-10 h-10 text-indigo-600"></i>
+                                <div class="flex items-center justify-center w-20 h-20 rounded-full mb-6 icon-container">
+                                    <i data-lucide="shirt" class="w-10 h-10 text-white"></i>
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition duration-300">DAART-CHAS CLOTHES</h3>
+                                <h3 class="text-xl font-bold text-white mb-2 transition duration-300">DAART-CHAS CLOTHES</h3>
+                            </div>
+                        </button>
+                        <!-- DAART-CHAS SOLAR ENERGY - Unique Colorful Gradient -->
+                        <button class="group p-8 rounded-xl shadow-lg company-button bg-gradient-to-r from-yellow-400 to-green-500 hover:from-yellow-500 hover:to-green-600 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50" onclick="navigateTo('solar')">
+                            <div class="flex flex-col items-center">
+                                <div class="flex items-center justify-center w-20 h-20 rounded-full mb-6 icon-container">
+                                    <i data-lucide="zap" class="w-10 h-10 text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-2 transition duration-300">DAART-CHAS SOLAR ENERGY</h3>
                             </div>
                         </button>
                     </div>
@@ -148,73 +240,204 @@
         </div>
     
         <!-- DAART-CHAS MEDIA Page -->
-        <div id="media-page" class="page-content min-h-screen">
-            <header class="py-16 text-center bg-gray-100">
-                <h1 class="text-4xl font-bold text-gray-900">DAART-CHAS MEDIA</h1>
-            </header>
-            <div class="container mx-auto p-8">
-                <div class="prose lg:prose-xl max-w-none text-gray-700">
-                    <p>Daart-chas media is a multimedia brand. We handle brand development, management, and promotions.</p>
-                    <p>We handle all aspects of "BRANDING & PACKAGING" A BRAND./POLITICIAN. These include:</p>
-                    <ul class="list-disc list-inside">
-                        <li>Conceptualizing the ideas.</li>
-                        <li>Designing and printing of business cards, files & folders, marketing fliers, receipts and invoices, company seals, office and company vehicles branding.</li>
-                    </ul>
-                    <p>We provide strategies consulting for both people in businesses and politics. We design unique, cutting-edge brand promotions, marketing, and marketing strategies. We come up with innovative brand development strategy and techniques.</p>
-                    <p>We offer very cost-effective brand/business and political campaigns management strategies.</p>
-                    <p>We work diligently with our clients, be they businesses or people in politics, to design very innovative and practical, easy-to-implement route-to-market (RTM); for start-ups and new products or emerging brands. We also coordinate effective political campaigning drives for those in politics.</p>
+        <div id="media-page" class="page-content bg-gray-50">
+            <header class="hero-section-page hero">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-5xl font-extrabold mb-4 animate-fade-in-down">DAART-CHAS MEDIA</h1>
+                    <p class="text-lg text-gray-200 max-w-2xl mx-auto animate-fade-in-up">
+                        We are a multimedia brand specializing in innovative brand development, management, and promotions.
+                    </p>
                 </div>
-            </div>
+            </header>
+            <section class="container mx-auto py-16 px-4 md:px-8">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl transition-all duration-300 ease-in-out">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="lg:col-span-1">
+                            <img src="https://placehold.co/700x500/a855f7/ffffff?text=Branding+and+Design" alt="Media branding and design" class="rounded-2xl shadow-xl transform transition-transform hover:scale-105 duration-300">
+                        </div>
+                        <div class="lg:col-span-1">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Services</h2>
+                            <ul class="prose lg:prose-xl max-w-none text-gray-700 list-disc list-inside space-y-4">
+                                <li>Daart-chas media is a multimedia brand. We handle brand development, management, and promotions.</li>
+                                <li>We handle all aspects of "BRANDING & PACKAGING" of BRANDs (People in politics). These include:
+                                    <ul class="list-disc list-inside ml-8 mt-2">
+                                        <li>Conceptualizing the ideas.</li>
+                                        <li>Designing and printing of business cards, files & folders, marketing fliers, receipts and invoices, company seals, office and company vehicles branding. Etc.</li>
+                                    </ul>
+                                </li>
+                                <li>We provide strategies consulting for both people in businesses and politics. By designing unique, cutting-edge promotions, marketing, and marketing strategies.</li>
+                                <li>We come up with an innovative brand/PRODUCTS development strategies and techniques.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     
         <!-- DAART-CHAS FOOD Page -->
-        <div id="food-page" class="page-content min-h-screen">
-            <header class="py-16 text-center bg-gray-100">
-                <h1 class="text-4xl font-bold text-gray-900">DAART-CHAS FOODS, HOTELS & HOME MANAGEMENT</h1>
-            </header>
-            <div class="container mx-auto p-8">
-                <div class="prose lg:prose-xl max-w-none text-gray-700">
-                    <h3 class="text-2xl font-bold text-gray-900">DAART-CHAS SOUPS SHOP:</h3>
-                    <p>Where you can buy your POTS of SOUPS and STEW ALL @ A RIDICULOUSLY LOW PRICES; Starting from N12,500 for a Pot of soup with over a dozen pieces of beef! We can also order your lunch and dinner from us for as low as N1500. We are simply "Crazy"😃...</p>
-                    <p>Our company is designed to help the business-minded men and women/the busy executives to live more easily at very little cost.</p>
-                    <p>We take care of all your domestic needs, so you can focus wholly on that which brings you money— your work and businesses. We simply do all the 'dirty works' just so you can be more productive!!!</p>
-                    <p>With us, you can save money and your life from the risk of hiring domestic help you know little or nothing about their backgrounds. Or eating out, or taking your clothes to an expensive laundry shop, where you're not even aware of how well and hygienically they handle your clothes. For instance, I once saw a laundry man, washing a customer's clothes with a huge iron brush... the reason, your clothes wear out in no time, and you would usually blame it on the maker of the clothes, while your "wack" laundry man is responsible for it!</p>
-                    <p>We can come over to your homes to thoroughly clean your homes, wash all your clothing, including underwear, and even cook you bulk food, which you can fridge. We can also fumigate your homes.</p>
-                    <p>Yea, it can only be Daart-chas, the brand wey no dey follow crowd.</p>
+        <div id="food-page" class="page-content bg-gray-50">
+            <header class="hero-section-page hero">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-5xl font-extrabold mb-4 animate-fade-in-down">DAART-CHAS FOODS & HOTELS</h1>
+                    <p class="text-lg text-gray-200 max-w-2xl mx-auto animate-fade-in-up">
+                        Enjoy delicious, affordable meals and professional home management services designed for busy professionals.
+                    </p>
                 </div>
-            </div>
+            </header>
+            <section class="container mx-auto py-16 px-4 md:px-8">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl transition-all duration-300 ease-in-out">
+                    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-10">Our Specialties</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="rounded-2xl overflow-hidden shadow-lg transform transition-transform hover:scale-105 duration-300 bg-gray-50 p-6">
+                            <img src="https://placehold.co/600x400/8b5cf6/ffffff?text=Delicious+Pots+of+Soup" alt="Delicious pot of soup" class="w-full h-auto rounded-xl mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Delicious Pots of Soup</h3>
+                            <p class="text-gray-600">Buy your soups and stews at ridiculously low prices, complete with over a dozen pieces of beef!</p>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden shadow-lg transform transition-transform hover:scale-105 duration-300 bg-gray-50 p-6">
+                            <img src="https://placehold.co/600x400/c084fc/ffffff?text=Individual+Gourmet+Meals" alt="Individual gourmet meal" class="w-full h-auto rounded-xl mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Individual Gourmet Meals</h3>
+                            <p class="text-gray-600">Order your lunch and dinner from us for as low as N1500, with a variety of gourmet options.</p>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden shadow-lg transform transition-transform hover:scale-105 duration-300 bg-gray-50 p-6">
+                            <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Professional+Cleaning+Service" alt="Professional cleaning service" class="w-full h-auto rounded-xl mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Professional Home Management</h3>
+                            <p class="text-gray-600">We take care of all your domestic needs so you can focus on your work and businesses.</p>
+                        </div>
+                    </div>
+                    <div class="prose lg:prose-xl max-w-none text-gray-700 mt-12">
+                        <h3 class="text-2xl font-extrabold text-gray-900 mb-4">About Our Services:</h3>
+                        <p>Our company is designed to help the business-minded men and women-the busy executives to live life more easily at very little cost.</p>
+                        <p>We take care of all your domestic needs, so you can focus wholly on that which brings you money— your work and businesses.</p>
+                    </div>
+                </div>
+            </section>
         </div>
     
         <!-- DAART-CHAS FURNITURE Page -->
-        <div id="furniture-page" class="page-content min-h-screen">
-            <header class="py-16 text-center bg-gray-100">
-                <h1 class="text-4xl font-bold text-gray-900">DAART-CHAS FURNITURE, INTERIOR AND FINISHINGS</h1>
-            </header>
-            <div class="container mx-auto p-8">
-                <div class="prose lg:prose-xl max-w-none text-gray-700">
-                    <p>Our company specializes in building innovative and Minimalist furniture, as we seek to be eco-friendly. We have been reinventing the art of furniture making and home furnishing. Thus we design and build furniture with very little to zero wood. Convertible furniture is one of our specialties.</p>
-                    <p>We also deliberately Afro-centric in our interior design and finishing, introducing, integrating and utilizing our African motives, designs and crafts in our furniture and interior design and finishings. Our furniture designs are completely uniquely crafted and breath-taking!</p>
-                    <p>We also produce on-demand quality paints, and we also paint your building in a very creative and highly professional way. Our very creative and skillful in-house artists are quite capable of creating and mixing very rare and beautiful colors that will make your house/building stand apart.</p>
-                    <p>Our in-house artists can also craft-mould very rare and unique designs and patterns on your window and door hoods, and even incorporate art works on the walls of your building or fence. They can also design very stunning sculptures, statues and waterfalls.</p>
-                    <p>Our interior design experts would help design the most aesthetic lighting position for your homes to give each space a unique ambiance.</p>
-                    <p>Our interior designer can design very colorful, out-of-this-world curtains and blinds for homes.</p>
+        <div id="furniture-page" class="page-content bg-gray-50">
+            <header class="hero-section-page hero">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-5xl font-extrabold mb-4 animate-fade-in-down">DAART-CHAS FURNITURE & INTERIORS</h1>
+                    <p class="text-lg text-gray-200 max-w-2xl mx-auto animate-fade-in-up">
+                        Innovative, eco-friendly furniture and Afro-centric interior designs that are uniquely crafted and breathtaking.
+                    </p>
                 </div>
-            </div>
+            </header>
+            <section class="container mx-auto py-16 px-4 md:px-8">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl transition-all duration-300 ease-in-out">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+                        <div class="lg:col-span-1">
+                            <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Our Innovative Designs</h2>
+                            <ul class="prose lg:prose-xl max-w-none text-gray-700 list-disc list-inside space-y-4">
+                                <li>Our company specializes in building innovative and Minimalist furniture, as we seek to be eco-friendly. We design and build furniture with very little to zero wood.</li>
+                                <li>
+                                    We also create convertible furniture, one of our specialties.
+                                </li>
+                                <li>
+                                    We are deliberately Afro-centric in our interior design and finishing, introducing, integrating and utilizing our African motives, designs and crafts in our furniture and interior design and finishings.
+                                </li>
+                                <li>
+                                    Our very creative and skillful in-house artists are quite capable of creating and mixing very rare and beautiful colors that will make your house/building stand apart.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="lg:col-span-1">
+                            <img src="https://placehold.co/700x500/22c55e/ffffff?text=Modern+Furniture" alt="Modern minimalist furniture" class="rounded-2xl shadow-xl transform transition-transform hover:scale-105 duration-300">
+                        </div>
+                    </div>
+                    
+                    <!-- Added sections for the new content -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 pt-8 border-t border-gray-200">
+                        <div class="prose lg:prose-xl max-w-none text-gray-700">
+                            <h3 class="text-2xl font-extrabold text-gray-900 mb-4">ARTS AND CRAFTS</h3>
+                            <p>Our in-house artists can also mould very rare and unique designs and patterns on your window and door hoods, and even incorporate art works on the walls of your building or fence.</p>
+                        </div>
+                        <div class="prose lg:prose-xl max-w-none text-gray-700">
+                            <h3 class="text-2xl font-extrabold text-gray-900 mb-4">SCULPTURE & WATERFALL</h3>
+                            <p>Our artists can also design very stunning sculptures, statues and waterfalls.</p>
+                        </div>
+                        <div class="prose lg:prose-xl max-w-none text-gray-700">
+                            <h3 class="text-2xl font-extrabold text-gray-900 mb-4">LIGHTS & LIGHTING DESIGNS</h3>
+                            <p>Our interior design experts would help design the most aesthetic lighting position for your homes to give each space a unique ambiance.</p>
+                        </div>
+                        <div class="prose lg:prose-xl max-w-none text-gray-700">
+                            <h3 class="text-2xl font-extrabold text-gray-900 mb-4">CURTAINS & BLINDS</h3>
+                            <p>Our interior designer can design very colorful, out-of-this-world curtains and blinds for homes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="prose lg:prose-xl max-w-none text-gray-700 mt-12 pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-extrabold text-gray-900 mb-4">PAINT PRODUCTION & PAINTING</h3>
+                        <p>We also produce on-demand quality paints, and we paint your building in a very creative and highly professional way.</p>
+                    </div>
+                </div>
+            </section>
         </div>
-    
+
         <!-- DAART-CHAS CLOTHES Page -->
-        <div id="clothes-page" class="page-content min-h-screen">
-            <header class="py-16 text-center bg-gray-100">
-                <h1 class="text-4xl font-bold text-gray-900">DAART-CHAS CLOTHES</h1>
-            </header>
-            <div class="container mx-auto p-8">
-                <div class="prose lg:prose-xl max-w-none text-gray-700">
-                    <p>This is the clothing arm of Daart-chas group of companies. Here we specialize and pride ourselves on making high-quality, neatly and perfectly finished ready-to-wear (RTW) or what is locally and commonly known as already-made African-styled clothing.</p>
-                    <p>We were the 1st brand in Nigeria to start making and packing our African/Nigerian Styled clothing like the western/foreign clothes, complete with brand labels, size tags, etc.</p>
-                    <p>We pride ourselves on coming up with stunning, creative styles that will always wow our customers. We also provide couture services. With this, we liberate you from the menace of your average tailor—in terms of eliminating the delays and disappointment that come with patronizing your local tailor.</p>
-                    <p>Daart-chas clothes brings lots of ease to people wishing to buy and make our African-styled clothings.</p>
+        <div id="clothes-page" class="page-content bg-gray-50">
+            <header class="hero-section-page hero">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-5xl font-extrabold mb-4 animate-fade-in-down">DAART-CHAS CLOTHES</h1>
+                    <p class="text-lg text-gray-200 max-w-2xl mx-auto animate-fade-in-up">
+                        High-quality, neatly finished ready-to-wear African-styled clothing that brings ease to your life.
+                    </p>
                 </div>
-            </div>
+            </header>
+            <section class="container mx-auto py-16 px-4 md:px-8">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl transition-all duration-300 ease-in-out">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="lg:col-span-1">
+                            <img src="https://placehold.co/700x500/ec4899/ffffff?text=African+Clothing+Design" alt="African clothing design" class="rounded-2xl shadow-xl transform transition-transform hover:scale-105 duration-300">
+                        </div>
+                        <div class="lg:col-span-1">
+                            <!-- New sentence added here -->
+                            <p class="prose lg:prose-xl max-w-none text-gray-700 mb-6">Daart-chas clothes brings lots of ease to people wishing to buy and (or) make our African-styled clothing.</p>
+                            <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Our Services</h2>
+                            <ul class="prose lg:prose-xl max-w-none text-gray-700 list-disc list-inside space-y-4">
+                                <li>We specialize and pride ourselves in making high-quality, neatly and perfectly finished ready-to-wear (RTW) or what is locally and commonly known as already-made African-styled clothing.</li>
+                                <li>We were the 1st brand in Nigeria to start making and packing our African/Nigerian Styled clothing like the western/foreign/imported clothes, complete with brand labels, size tags, etc.</li>
+                                <li>We pride ourselves with coming up with original stunning, and creative styles and designs that will always "wow" our customers.</li>
+                                <li>We also provide couture services. With this, we liberate you from the menace of your average tailors—in terms of eliminating the delays and disappointment that come with patronizing your local tailors.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- DAART-CHAS SOLAR ENERGY Page -->
+        <div id="solar-page" class="page-content bg-gray-50">
+            <header class="hero-section-page hero">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-5xl font-extrabold mb-4 animate-fade-in-down">DAART-CHAS SOLAR ENERGY</h1>
+                    <p class="text-lg text-gray-200 max-w-2xl mx-auto animate-fade-in-up">
+                        Providing affordable solar systems and quality installations to bridge the energy gap in Nigeria.
+                    </p>
+                </div>
+            </header>
+            <section class="container mx-auto py-16 px-4 md:px-8">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl transition-all duration-300 ease-in-out">
+                    <div class="prose lg:prose-xl max-w-none text-gray-700">
+                        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Our Solar Solutions</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                            <div>
+                                <ul class="list-disc list-inside space-y-4">
+                                    <li>DAART-CHAS SOLAR ENERGY is focused on bridging the "artificial gaps" created by vendors and solar technicians that make basic solar energy systems unaffordable to the average Nigerian.</li>
+                                    <li>In collaboration with our foreign partners, we offer very affordable solar systems, including a complete set of solar equipment (panel, charge controller, inverter, and battery) starting from as low as N280,000, depending on one's energy needs.</li>
+                                    <li>We provide high-quality solar equipment at very affordable rates.</li>
+                                    <li>We are the only company in Nigeria currently providing solar systems to homes at the lowest cost.</li>
+                                    <li>We are also actively educating people on how best to install and enjoy solar energy at very low prices.</li>
+                                    <li>We are also training and retraining our in-house technicians on international best practices in solar installation and maintenance.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <img src="https://placehold.co/700x500/facc15/ffffff?text=Solar+Panels" alt="Solar panels on a roof" class="rounded-2xl shadow-xl transform transition-transform hover:scale-105 duration-300">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -223,7 +446,9 @@
         <div class="container mx-auto px-4 md:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-8 md:space-y-0">
                 <div class="flex items-center space-x-4">
-                    <i data-lucide="building-2" class="text-indigo-600 w-12 h-12"></i>
+                    <!-- IMPORTANT: The 'src' attribute now uses a relative path. -->
+                    <!-- Please make sure your image file is named "WhatsApp Image 2025-08-01 at 00.26.47.jpeg" and is in the same folder as this index.html file. -->
+                    <img src="./WhatsApp Image 2025-08-01 at 00.26.47.jpeg" alt="DAART-CHAS Group Logo" class="w-12 h-12 shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/48x48/4a74b3/ffffff?text=DC';">
                     <div>
                         <p class="text-xl font-bold text-white">DAART-CHAS GROUP</p>
                         <p class="text-sm text-gray-500">The holding company</p>
@@ -233,20 +458,20 @@
                 <div class="space-y-2">
                     <p class="font-semibold text-white mb-2">Contact Us</p>
                     <div class="flex items-center space-x-2 justify-center md:justify-start">
-                        <i data-lucide="map-pin" class="text-indigo-500 w-5 h-5"></i>
-                        <span>NO.9, Admiralty estaate, ibuzo express road, Asaba, Delta state</span>
+                        <i data-lucide="map-pin" class="text-green-400 w-5 h-5"></i>
+                        <span>NO.9, Admiralty estate, ibuzo express road, Asaba, Delta state</span>
                     </div>
                     <div class="flex items-center space-x-2 justify-center md:justify-start">
-                        <i data-lucide="map-pin" class="text-indigo-500 w-5 h-5"></i>
-                        <span>NO.16, Jeremiah Useni estate, Gwagwalada, FCT, Abuja.</span>
+                        <i data-lucide="map-pin" class="text-green-400 w-5 h-5"></i>
+                        <span>& NO.16, Jeremiah Useni estate, Gwagwalada, FCT, Abuja.</span>
                     </div>
                     <div class="flex items-center space-x-2 justify-center md:justify-start">
-                        <i data-lucide="phone" class="text-indigo-500 w-5 h-5"></i>
-                        <span>09073703141</span>
+                        <i data-lucide="phone" class="text-green-400 w-5 h-5"></i>
+                        <span>CALL OR WHATSAPP: 09073703141</span>
                     </div>
                     <div class="flex items-center space-x-2 justify-center md:justify-start">
-                        <i data-lucide="mail" class="text-indigo-500 w-5 h-5"></i>
-                        <span>daartchasgroup@gmail.com</span>
+                        <i data-lucide="mail" class="text-green-400 w-5 h-5"></i>
+                        <span>Email: daartchasgroup@gmail.com</span>
                     </div>
                 </div>
             </div>
@@ -266,6 +491,7 @@
             });
             // Show the selected page
             document.getElementById(pageId + '-page').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top of the page
         }
 
         // Script to handle the mobile menu toggle
